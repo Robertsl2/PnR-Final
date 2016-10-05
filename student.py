@@ -47,6 +47,8 @@ class GoPiggy(pigo.Pigo):
     def dance(self):
         print("Piggy dance")
         ##### WRITE YOUR FIRST PROJECT HERE
+        print('is it safe to dance?')
+        print(self.isClear())
         for x in range(100, 200, 25):
             print('speed is set to:' + str(x))
             servo(30)
@@ -62,6 +64,8 @@ class GoPiggy(pigo.Pigo):
 
     def status(self):
         print("My power is at "+ str(volt()) +"volts")
+
+
     # AUTONOMOUS DRIVING
     def nav(self):
         print("Piggy nav")
