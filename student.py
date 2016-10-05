@@ -33,6 +33,7 @@ class GoPiggy(pigo.Pigo):
                 "2": ("Rotate", self.rotate),
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
+                "s": ("check status", self.status),
                 "q": ("Quit", quit)
                 }
         # loop and print the menu...
@@ -57,7 +58,8 @@ class GoPiggy(pigo.Pigo):
             servo(120)
             time.sleep(.1)
 
-
+    def status(self):
+        print("My power is at "+ volt() +"volts")
     # AUTONOMOUS DRIVING
     def nav(self):
         print("Piggy nav")
