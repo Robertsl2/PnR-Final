@@ -49,18 +49,21 @@ class GoPiggy(pigo.Pigo):
         ##### WRITE YOUR FIRST PROJECT HERE
         print('is it safe to dance?')
         print(self.isClear())
-        for x in range(100, 200, 25):
-            print('speed is set to:' + str(x))
-            servo(30)
-            set_speed(x)
-            self.encB(10)
-            self.encR(16)
-            self.encL(8)
-            self.encF(5)
-            self.encR(8)
-            self.encF(15)
-            servo(160)
-            time.sleep(.1)
+        if self.isClear():
+            for x in range(100, 200, 25):
+                print('speed is set to:' + str(x))
+                servo(30)
+                set_speed(x)
+                self.encB(10)
+                self.encR(16)
+                self.encL(8)
+                self.encF(5)
+                self.encR(8)
+                self.encF(15)
+                servo(160)
+                time.sleep(.1)
+        else:
+            stop()
 
     def status(self):
         print("My power is at "+ str(volt()) +"volts")
