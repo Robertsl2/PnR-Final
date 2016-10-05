@@ -49,7 +49,7 @@ class GoPiggy(pigo.Pigo):
         ##### WRITE YOUR FIRST PROJECT HERE
         for x in range(100, 200, 25):
             print('speed is set to:' + str(x))
-            servo(20)
+            servo(30)
             set_speed(x)
             self.encB(10)
             self.encR(16)
@@ -57,7 +57,7 @@ class GoPiggy(pigo.Pigo):
             self.encF(5)
             self.encR(8)
             self.encF(15)
-            servo(120)
+            servo(160)
             time.sleep(.1)
 
     def status(self):
