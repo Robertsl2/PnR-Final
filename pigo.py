@@ -33,7 +33,7 @@ class Pigo(object):
         menu = {"1": ("Navigate forward", self.nav),
                 "2": ("Rotate", self.rotate),
                 "3": ("Dance", self.dance),
-                "4": ("Calibrate servo", self.calibrate),
+                "4": ("Calibrate", self.calibrate),
                 "5": ("Forward", self.encF),
                 "q": ("Quit", quit)
                 }
@@ -147,7 +147,7 @@ class Pigo(object):
             time.sleep(.01)
 
     def isClear(self) -> bool:
-        for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), 5):
+        for x in range((self.MIDPOINT - 15), (self.MIDPOINT + 15), 5):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
@@ -222,10 +222,12 @@ class Pigo(object):
                     break
         response = input("Do you want to check if I'm driving straight? (y/n)")
         if response == 'y':
+
             while True:
                 set_left_speed(self.LEFT_SPEED)
                 set_right_speed(self.RIGHT_SPEED)
-                self.encF(18)
+                print("Left: " + str(self.LEFT_SPEED) + "Right: " + str(self.RIGHT_SPEED))
+                self.encF(9)
                 response = input("Reduce left, reduce right or done? (l/r/d): ")
                 if response == 'l':
                     self.LEFT_SPEED -= 5
@@ -233,7 +235,6 @@ class Pigo(object):
                     self.RIGHT_SPEED -= 5
                 else:
                     break
-
 
 ########################
 #### STATIC FUNCTIONS
