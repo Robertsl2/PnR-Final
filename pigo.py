@@ -222,9 +222,9 @@ class Pigo(object):
                     break
         response = input("Do you want to check if I'm driving straight? (y/n)")
         if response == 'y':
-            set_left_speed(self.LEFT_SPEED)
-            set_right_speed(self.RIGHT_SPEED)
             while True:
+                set_left_speed(self.LEFT_SPEED)
+                set_right_speed(self.RIGHT_SPEED)
                 self.encF(18)
                 response = input("Reduce left, reduce right or done? (l/r/d): ")
                 if response == 'l':
