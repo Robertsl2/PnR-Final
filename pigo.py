@@ -230,9 +230,9 @@ class Pigo(object):
                 self.encF(9)
                 response = input("Reduce left, reduce right or done? (l/r/d): ")
                 if response == 'l':
-                    self.LEFT_SPEED -= 5
+                    self.LEFT_SPEED -= 15
                 elif response == 'r':
-                    self.RIGHT_SPEED -= 5
+                    self.RIGHT_SPEED -= 15
                 else:
                     break
 
