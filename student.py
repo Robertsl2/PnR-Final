@@ -14,6 +14,15 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 100
     STOP_DIST = 20
+    speed = 100
+    TURNSPEED = 195
+
+    def setSpeed(self, x):
+        self.speed = x
+        set_speed(self.speed)
+
+    def getSpeed(self):
+        return self.speed
 
     # CONSTRUCTOR
     def __init__(self):
@@ -43,6 +52,14 @@ class GoPiggy(pigo.Pigo):
         ans = input("Your selection: ")
         menu.get(ans, [None, error])[1]()
 
+    def turnR(self, x):
+        previous = self.getSpeed()
+        self.setSpeed(self.TURNSPEED)
+        self.encR(x)
+        self.setSpeed(previous)
+
+
+
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
         print("Piggy dance")
@@ -52,7 +69,7 @@ class GoPiggy(pigo.Pigo):
         while self.completeClear() and x <= 200:
             print('speed is set to:' + str(x))
             servo(30)
-            set_speed(x)
+            self.setSpeed(x)
             self.encB(10)
             self.encR(16)
             servo(150)
