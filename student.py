@@ -48,9 +48,8 @@ class GoPiggy(pigo.Pigo):
         print("Piggy dance")
         ##### WRITE YOUR FIRST PROJECT HERE
         print('is it safe to dance?')
-        print(self.isClear())
         x = 100
-        while self.isClear() and x <= 200:
+        while self.completeClear() and x <= 200:
             print('speed is set to:' + str(x))
             servo(30)
             set_speed(x)
@@ -66,6 +65,28 @@ class GoPiggy(pigo.Pigo):
             servo(160)
             time.sleep(.1)
             x += 25
+
+
+    # Complete Clear Check
+    def completeClear(self):
+        t=4
+        print("let's check 0 degrees")
+        if not self.isClear():
+            return False
+        self.encR(t)
+        print("let's check 90 degrees")
+        if not self.isClear():
+            return False
+        self.encR(t)
+        print("let's check 180 degrees")
+        if not self.isClear():
+            return False
+        self.encR(t)
+        print("let's check 270 degrees")
+        if not self.isClear():
+            return False
+        self.encR(t)
+        return True
 
 
 
