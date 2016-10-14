@@ -90,19 +90,19 @@ class GoPiggy(pigo.Pigo):
         print("let's check 0 degrees")
         if not self.isClear():
             return False
-        self.encR(t)
+        self.turnR(t)
         print("let's check 90 degrees")
         if not self.isClear():
             return False
-        self.encR(t)
+        self.turnR(t)
         print("let's check 180 degrees")
         if not self.isClear():
             return False
-        self.encR(t)
+        self.turnR(t)
         print("let's check 270 degrees")
         if not self.isClear():
             return False
-        self.encR(t)
+        self.turnR(t)
         return True
 
 
