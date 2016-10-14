@@ -69,7 +69,7 @@ class GoPiggy(pigo.Pigo):
 
     # Complete Clear Check
     def completeClear(self):
-        t=8
+        t=9
         print("let's check 0 degrees")
         if not self.isClear():
             return False
