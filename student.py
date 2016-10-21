@@ -121,11 +121,22 @@ class GoPiggy(pigo.Pigo):
 
     def nav(self):
         print("Piggy Nav")
+        while True:
+            #isClear MVP
+            while self.isClear():
+                # lets go forward a little
+                self.encF(10)
+            answer = self.choosePath()
+            if answer == "left";
+                self.encL(5)
+            elif answer == "right":
+                self.encR(5)
         # TODO: If while loop fails, check for other paths
         # loop: check that its clear
         while self.isClear():
             # lets go forward a little
             self.encF(10)
+
             if not self.isClear():
                 self.completeClear()
 
