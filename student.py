@@ -133,12 +133,7 @@ class GoPiggy(pigo.Pigo):
                 self.encR(5)
         # TODO: If while loop fails, check for other paths
         # loop: check that its clear
-        while self.isClear():
-            # lets go forward a little
-            self.encF(10)
 
-            if not self.isClear():
-                self.completeClear()
 
 
 
