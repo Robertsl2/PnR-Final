@@ -58,18 +58,6 @@ class GoPiggy(pigo.Pigo):
         self.encR(x)
         self.setSpeed(previous)
 
-    def nav(self):
-        print("Piggy Nav")
-        #TODO: If while loop fails, check for other paths
-        #loop: check that its clear
-        while self.isClear():
-            #lets go forward a little
-            self.encF(10)
-
-
-
-
-
 
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
@@ -130,6 +118,14 @@ class GoPiggy(pigo.Pigo):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
 
+
+    def nav(self):
+        print("Piggy Nav")
+        # TODO: If while loop fails, check for other paths
+        # loop: check that its clear
+        while self.isClear():
+            # lets go forward a little
+            self.encF(10)
 
 ####################################################
 ############### STATIC FUNCTIONS
