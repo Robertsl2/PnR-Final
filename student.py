@@ -126,8 +126,13 @@ class GoPiggy(pigo.Pigo):
         while self.isClear():
             # lets go forward a little
             self.encF(10)
+            if not self.isClear():
+                self.completeClear()
 
-####################################################
+
+
+
+        ####################################################
 ############### STATIC FUNCTIONS
 
 def error():
