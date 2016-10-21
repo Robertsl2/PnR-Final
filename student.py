@@ -127,7 +127,7 @@ class GoPiggy(pigo.Pigo):
                 # lets go forward a little
                 self.encF(10)
             answer = self.choosePath()
-            if answer == "left";
+            if answer == "left":
                 self.encL(5)
             elif answer == "right":
                 self.encR(5)
