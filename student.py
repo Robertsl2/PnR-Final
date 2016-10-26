@@ -19,7 +19,8 @@ class GoPiggy(pigo.Pigo):
 
     def setSpeed(self, x):
         self.speed = x
-        set_speed(self.speed)
+        set_left_speed(self.speed)
+        set_right_speed(self.speed - 10)
 
     def getSpeed(self):
         return self.speed
@@ -110,7 +111,7 @@ class GoPiggy(pigo.Pigo):
 
     def status(self):
         print("My power is at "+ str(volt()) +"volts")
-        self.encF(9)
+
 
 
     # AUTONOMOUS DRIVING
