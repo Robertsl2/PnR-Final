@@ -9,7 +9,7 @@ import time
 #### (students will make their own class & inherit this)
 
 class Pigo(object):
-    MIDPOINT = 77
+    MIDPOINT = 90
     STOP_DIST = 20
     RIGHT_SPEED = 185
     LEFT_SPEED = 195
