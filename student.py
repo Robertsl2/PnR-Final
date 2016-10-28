@@ -125,7 +125,7 @@ class GoPiggy(pigo.Pigo):
             #isClear MVP
             while self.isClear():
                 # lets go forward a little
-                self.encF(10)
+                self.testDrive()
             answer = self.choosePath()
             if answer == "left":
                 self.encL(5)
