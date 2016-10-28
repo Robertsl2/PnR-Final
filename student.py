@@ -132,11 +132,12 @@ class GoPiggy(pigo.Pigo):
             elif answer == "right":
                 self.encR(5)
 
+    ###Test Drive Method
     def testDrive(self):
         print("here we go!!")
         fwd()
         while true:
-            if us_dist(15)<self.STOP_DIST
+            if us_dist(15) < self.STOP_DIST:
                 break
             time.sleep(.05)
         self.stop()
