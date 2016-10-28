@@ -43,8 +43,10 @@ class GoPiggy(pigo.Pigo):
                 "2": ("Rotate", self.rotate),
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
+                "5": ("test drive", self.testDrive),
                 "s": ("check status", self.status),
                 "q": ("Quit", quit)
+
                 }
         # loop and print the menu...
         for key in sorted(menu.keys()):
@@ -130,7 +132,14 @@ class GoPiggy(pigo.Pigo):
             elif answer == "right":
                 self.encR(5)
 
-
+    def testDrive(self):
+        print("here we go!!")
+        fwd()
+        while true:
+            if us_dist(15)<self.STOP_DIST
+                break
+            time.sleep(.05)
+        self.stop()
 
 
 
