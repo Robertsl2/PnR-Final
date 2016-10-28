@@ -134,6 +134,8 @@ class GoPiggy(pigo.Pigo):
 
     ###Test Drive Method
     def testDrive(self):
+        set_left_speed(195)
+        set_right_speed(185)
         print("here we go!!")
         fwd()
         while True:
