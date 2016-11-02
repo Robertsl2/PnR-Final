@@ -88,27 +88,27 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.1)
             x += 25
 
-        def moreClear(self) -> bool:
-            for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), +15):
-                servo(x)
+    def moreClear(self) -> bool:
+        for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), +15):
+            servo(x)
+            time.sleep(.1)
+            scan1 = us_dist(15)
+            time.sleep(.1)
+            # double check the distance
+            scan2 = us_dist(15)
+            time.sleep(.1)
+            # if I found a different distance the second time....
+            if abs(scan1 - scan2) > 2:
+                scan3 = us_dist(15)
                 time.sleep(.1)
-                scan1 = us_dist(15)
-                time.sleep(.1)
-                # double check the distance
-                scan2 = us_dist(15)
-                time.sleep(.1)
-                # if I found a different distance the second time....
-                if abs(scan1 - scan2) > 2:
-                    scan3 = us_dist(15)
-                    time.sleep(.1)
-                    # take another scan and average the three together
-                    scan1 = (scan1 + scan2 + scan3) / 3
-                self.scan[x] = scan1
-                print("Degree: " + str(x) + ", distance: " + str(scan1))
-                if scan1 < self.STOP_DIST:
-                    print("Doesn't look clear to me")
-                    return False
-            return True
+                # take another scan and average the three together
+                scan1 = (scan1 + scan2 + scan3) / 3
+            self.scan[x] = scan1
+            print("Degree: " + str(x) + ", distance: " + str(scan1))
+            if scan1 < self.STOP_DIST:
+                print("Doesn't look clear to me")
+                return False
+        return True
 
 
     # Complete Clear Check
