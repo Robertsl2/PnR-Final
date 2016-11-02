@@ -16,6 +16,10 @@ class GoPiggy(pigo.Pigo):
     STOP_DIST = 20
     speed = 100
     TURNSPEED = 195
+    RIGHT_SPEED = 185
+    LEFT_SPEED = 195
+
+
 
     def setSpeed(self, x):
         self.speed = x
@@ -31,6 +35,7 @@ class GoPiggy(pigo.Pigo):
         # this method makes sure Piggy is looking forward
         #self.calibrate()
         # let's use an event-driven model, make a handler of sorts to listen for "events"
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
         while True:
             self.stop()
             self.handler()
@@ -85,6 +90,28 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.1)
             x += 25
 
+        def moreClear(self) -> bool:
+            for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), +15):
+                servo(x)
+                time.sleep(.1)
+                scan1 = us_dist(15)
+                time.sleep(.1)
+                # double check the distance
+                scan2 = us_dist(15)
+                time.sleep(.1)
+                # if I found a different distance the second time....
+                if abs(scan1 - scan2) > 2:
+                    scan3 = us_dist(15)
+                    time.sleep(.1)
+                    # take another scan and average the three together
+                    scan1 = (scan1 + scan2 + scan3) / 3
+                self.scan[x] = scan1
+                print("Degree: " + str(x) + ", distance: " + str(scan1))
+                if scan1 < self.STOP_DIST:
+                    print("Doesn't look clear to me")
+                    return False
+            return True
+
 
     # Complete Clear Check
     def completeClear(self):
@@ -123,7 +150,7 @@ class GoPiggy(pigo.Pigo):
         while True:
             # loop: check that its clear
             #isClear MVP
-            while self.isClear():
+            while self.moreClear():
                 # lets go forward a little
                 self.testDrive()
             answer = self.choosePath()
