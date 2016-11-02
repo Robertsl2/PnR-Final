@@ -14,17 +14,15 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 100
     STOP_DIST = 20
-    speed = 100
     TURNSPEED = 195
     RIGHT_SPEED = 185
     LEFT_SPEED = 195
 
 
 
-    def setSpeed(self, x):
-        self.speed = x
-        set_left_speed(self.speed)
-        set_right_speed(self.speed - 10)
+    def setSpeed(self, l, r):
+        set_left_speed(l)
+        set_right_speed(r)
 
     def getSpeed(self):
         return self.speed
@@ -76,7 +74,7 @@ class GoPiggy(pigo.Pigo):
         while self.completeClear() and x <= 200:
             print('speed is set to:' + str(x))
             servo(30)
-            self.setSpeed(x)
+            self.setSpeed(x, x-10)
             self.encB(10)
             self.encR(16)
             servo(150)
