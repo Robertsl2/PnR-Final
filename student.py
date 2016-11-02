@@ -88,6 +88,7 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.1)
             x += 25
 
+    #changed isClear
     def moreClear(self) -> bool:
         for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), +15):
             servo(x)
@@ -159,6 +160,7 @@ class GoPiggy(pigo.Pigo):
 
     ###Test Drive Method
     def testDrive(self):
+        servo(100)
         set_left_speed(195)
         set_right_speed(185)
         print("here we go!!")
