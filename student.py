@@ -17,6 +17,7 @@ class GoPiggy(pigo.Pigo):
     TURNSPEED = 195
     RIGHT_SPEED = 185
     LEFT_SPEED = 195
+    servo = 100
 
 
 
@@ -160,9 +161,6 @@ class GoPiggy(pigo.Pigo):
 
     ###Test Drive Method
     def testDrive(self):
-        servo(100)
-        set_left_speed(195)
-        set_right_speed(185)
         print("here we go!!")
         fwd()
         while True:
