@@ -162,6 +162,7 @@ class GoPiggy(pigo.Pigo):
     ###Test Drive Method
     def testDrive(self):
         servo(100)
+        ###################Change choose path servo speed!!!!!!!!!!
         print("here we go!!")
         fwd()
         while True:
@@ -171,7 +172,6 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.05)
             print("Seems clear, keep rolling")
         self.stop()
-
 
 
 
