@@ -141,30 +141,50 @@ class GoPiggy(pigo.Pigo):
     def status(self):
         print("My power is at "+ str(volt()) +"volts")
 
+    def widerScan(self):
+        # dump all values
+        self.flushScan()
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +10):
+            servo(x)
+            time.sleep(.1)
+            scan1 = us_dist(15)
+            time.sleep(.1)
+            # double check the distance
+            scan2 = us_dist(15)
+            # if I found a different distance the second time....
+            if abs(scan1 - scan2) > 2:
+                scan3 = us_dist(15)
+                time.sleep(.1)
+                # take another scan and average the three together
+                scan1 = (scan1 + scan2 + scan3) / 3
+            self.scan[x] = scan1
+            print("Degree: " + str(x) + ", distance: " + str(scan1))
+            time.sleep(.01)
 
+            # DECIDE WHICH WAY TO TURN
 
-    def choosePath2(self) -> str:
-        print('Considering options...')
-        if self.isClear():
-            return "fwd"
-        else:
-            self.wideScan()
-        avgRight = 0
-        avgLeft = 0
-        for x in range((self.MIDPOINT - 60), (self.MIDPOINT), +10):
-            if self.scan[x]:
-                avgRight += self.scan[x]
-        avgRight /= 60
-        print('The average dist on the right is ' + str(avgRight) + 'cm')
-        for x in range((self.MIDPOINT), (self.MIDPOINT + 60), +10):
-            if self.scan[x]:
-                avgLeft += self.scan[x]
-        avgLeft /= 60
-        print('The average dist on the left is ' + str(avgLeft) + 'cm')
-        if avgRight > avgLeft:
-            return "right"
-        else:
-            return "left"
+        def choosePath2(self) -> str:
+            print('Considering options...')
+            if self.isClear():
+                return "fwd"
+            else:
+                self.widerScan()
+            avgRight = 0
+            avgLeft = 0
+            for x in range(self.MIDPOINT - 60, self.MIDPOINT):
+                if self.scan[x]:
+                    avgRight += self.scan[x]
+            avgRight /= 60
+            print('The average dist on the right is ' + str(avgRight) + 'cm')
+            for x in range(self.MIDPOINT, self.MIDPOINT + 60):
+                if self.scan[x]:
+                    avgLeft += self.scan[x]
+            avgLeft /= 60
+            print('The average dist on the left is ' + str(avgLeft) + 'cm')
+            if avgRight > avgLeft:
+                return "right"
+            else:
+                return "left"
 
 
     # AUTONOMOUS DRIVING
@@ -177,7 +197,7 @@ class GoPiggy(pigo.Pigo):
             while self.moreClear():
                 # lets go forward a little
                 self.testDrive()
-            answer = self.choosePath()
+            answer = self.choosePath2()
             if answer == "left":
                 self.encL(5)
             elif answer == "right":
