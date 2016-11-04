@@ -176,7 +176,7 @@ class GoPiggy(pigo.Pigo):
                 if not self.frontClear():
                     print("Stop")
                     self.stop()
-                    answer = self.choosePath()
+                    answer = self.choosePath2()
                     # if left is more clear it goes left other wise it turns right
                     if answer == "left":
                         self.encL(7)
