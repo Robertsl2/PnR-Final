@@ -144,7 +144,7 @@ class GoPiggy(pigo.Pigo):
     def widerScan(self):
         # dump all values
         self.flushScan()
-        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +10):
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60, +5):
             servo(x)
             time.sleep(.1)
             scan1 = us_dist(15)
@@ -199,9 +199,9 @@ class GoPiggy(pigo.Pigo):
                 self.testDrive()
             answer = self.choosePath2()
             if answer == "left":
-                self.encL(5)
+                self.encL(4)
             elif answer == "right":
-                self.encR(5)
+                self.encR(4)
 
     ###Test Drive Method
     def testDrive(self):
