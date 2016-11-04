@@ -143,6 +143,30 @@ class GoPiggy(pigo.Pigo):
 
 
 
+    def choosePath2(self) -> str:
+        print('Considering options...')
+        if self.isClear():
+            return "fwd"
+        else:
+            self.wideScan()
+        avgRight = 0
+        avgLeft = 0
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT, +10):
+            if self.scan[x]:
+                avgRight += self.scan[x]
+        avgRight /= 60
+        print('The average dist on the right is ' + str(avgRight) + 'cm')
+        for x in range(self.MIDPOINT, self.MIDPOINT + 60, +10):
+            if self.scan[x]:
+                avgLeft += self.scan[x]
+        avgLeft /= 60
+        print('The average dist on the left is ' + str(avgLeft) + 'cm')
+        if avgRight > avgLeft:
+            return "right"
+        else:
+            return "left"
+
+
     # AUTONOMOUS DRIVING
     def nav(self):
         print("Piggy nav")
@@ -153,7 +177,7 @@ class GoPiggy(pigo.Pigo):
             while self.moreClear():
                 # lets go forward a little
                 self.testDrive()
-            answer = self.choosePath()
+            answer = self.choosePath2()
             if answer == "left":
                 self.encL(5)
             elif answer == "right":
