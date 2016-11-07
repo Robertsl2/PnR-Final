@@ -89,7 +89,7 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.1)
             x += 25
 
-    #changed isClear
+    #changed isClear method called moreClear
     def moreClear(self) -> bool:
         for x in range((self.MIDPOINT - 50), (self.MIDPOINT + 50), +30):
             servo(x)
@@ -196,9 +196,9 @@ class GoPiggy(pigo.Pigo):
                 self.testDrive()
             answer = self.choosePath2()
             if answer == "left":
-                self.encL(4)
+                self.encL(5)
             elif answer == "right":
-                self.encR(4)
+                self.encR(5)
 
     ###Test Drive Method
     def testDrive(self):
