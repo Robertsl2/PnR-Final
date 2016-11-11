@@ -19,8 +19,6 @@ class GoPiggy(pigo.Pigo):
     LEFT_SPEED = 195
     servo = 100
 
-
-
     def setSpeed(self, l, r):
         set_left_speed(l)
         set_right_speed(r)
@@ -64,7 +62,6 @@ class GoPiggy(pigo.Pigo):
         self.setSpeed(self.TURNSPEED)
         self.encR(x)
         self.setSpeed(previous)
-
 
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
@@ -112,7 +109,6 @@ class GoPiggy(pigo.Pigo):
                 return False
         return True
 
-
     # Complete Clear Check
     def completeClear(self):
         t=10
@@ -133,7 +129,6 @@ class GoPiggy(pigo.Pigo):
             return False
         self.turnR(t)
         return True
-
 
     def status(self):
         print("My power is at "+ str(volt()) +"volts")
@@ -214,9 +209,6 @@ class GoPiggy(pigo.Pigo):
             print("Seems clear, keep rolling")
         self.stop()
 
-
-
-
         ####################################################
 ############### STATIC FUNCTIONS
 
@@ -226,7 +218,6 @@ def error():
 
 def quit():
     raise SystemExit
-
 
 ####################################################
 ######## THE ENTIRE APP IS THIS ONE LINE....
