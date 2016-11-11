@@ -178,6 +178,10 @@ class GoPiggy(pigo.Pigo):
         else:
             return "left"
 
+    def perfectTurn(self):
+        while self.isClear():
+
+
 
     # AUTONOMOUS DRIVING
     def nav(self):
