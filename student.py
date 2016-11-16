@@ -14,6 +14,8 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 100
     STOP_DIST = 20
+    TIME_PER_DEGREE = .0035
+    TURN_MODIFIER = 1
     TURNSPEED = 195
     RIGHT_SPEED = 185
     LEFT_SPEED = 195
@@ -181,6 +183,30 @@ class GoPiggy(pigo.Pigo):
     def perfectTurn(self):
         while self.isClear():
 
+     #Degree turn
+    def rightTurn(self, deg):
+        print("let's turn" + str(deg) + " degrees right")
+        print("that means I turn for "+str(deg*self.TIME_PER_DEGREE) + "seconds")
+
+        Print("lets change motor speeds!")
+        set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
+        set_right_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
+
+        right_rot()
+        time.sleep(deg*self.TIME_PER_DEGREE)
+        self.stop()
+
+    def leftTurn(self, deg):
+        print("let's turn" + str(deg) + " degrees right")
+        print("that means I turn for " + str(deg * self.TIME_PER_DEGREE) + "seconds")
+
+        Print("lets change motor speeds!")
+        set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
+        set_right_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
+
+        left_rot()
+        time.sleep(deg * self.TIME_PER_DEGREE)
+        self.stop()
 
 
     # AUTONOMOUS DRIVING
@@ -195,9 +221,9 @@ class GoPiggy(pigo.Pigo):
                 self.testDrive()
             answer = self.choosePath2()
             if answer == "left":
-                self.encL(4)
+                self.leftTurn()
             elif answer == "right":
-                self.encR(4)
+                self.rightTurn()
 
     ###Test Drive Method
     def testDrive(self):
