@@ -180,15 +180,14 @@ class GoPiggy(pigo.Pigo):
         else:
             return "left"
 
-    def perfectTurn(self):
-        while self.isClear():
 
-     #Degree turn
+
+    #Degree turn
     def rightTurn(self, deg):
         print("let's turn" + str(deg) + " degrees right")
         print("that means I turn for "+str(deg*self.TIME_PER_DEGREE) + "seconds")
 
-        Print("lets change motor speeds!")
+        print("lets change motor speeds!")
         set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
         set_right_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
 
@@ -200,7 +199,7 @@ class GoPiggy(pigo.Pigo):
         print("let's turn" + str(deg) + " degrees right")
         print("that means I turn for " + str(deg * self.TIME_PER_DEGREE) + "seconds")
 
-        Print("lets change motor speeds!")
+        print("lets change motor speeds!")
         set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
         set_right_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
 
