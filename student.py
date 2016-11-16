@@ -220,9 +220,9 @@ class GoPiggy(pigo.Pigo):
                 self.testDrive()
             answer = self.choosePath2()
             if answer == "left":
-                self.leftTurn()
+                self.leftTurn(90)
             elif answer == "right":
-                self.rightTurn()
+                self.rightTurn(90)
 
     ###Test Drive Method
     def testDrive(self):
