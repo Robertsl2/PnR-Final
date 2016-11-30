@@ -20,6 +20,9 @@ class GoPiggy(pigo.Pigo):
     RIGHT_SPEED = 185
     LEFT_SPEED = 195
     servo = 100
+    #0.0 IS THE HEADING OF THE EXIT, EVERY TURN CHANGES THIS NUMBER
+    Turn_track = 0.0
+
 
     def setSpeed(self, l, r):
         set_left_speed(l)
@@ -64,6 +67,14 @@ class GoPiggy(pigo.Pigo):
         self.setSpeed(self.TURNSPEED)
         self.encR(x)
         self.setSpeed(previous)
+
+    def setSpeed(self, l, r):
+        set_left_speed(l)
+        set_right_speed(r)
+
+    def getSpeed(self):
+        return self.speed
+
 
     # A SIMPLE DANCE ALGORITHM
     def dance(self):
@@ -156,7 +167,7 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.01)
 
             # DECIDE WHICH WAY TO TURN
-
+    #Choose path
     def choosePath2(self) -> str:
         print('Considering options...')
         if self.isClear():
@@ -182,30 +193,45 @@ class GoPiggy(pigo.Pigo):
 
 
 
-    #Degree turn
+    #Timed Degree Right Turn
     def rightTurn(self, deg):
-        print("let's turn" + str(deg) + " degrees right")
-        print("that means I turn for "+str(deg*self.TIME_PER_DEGREE) + "seconds")
-
-        print("lets change motor speeds!")
-        set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
-        set_right_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
-
+        # adjust the tracker se we know how many degrees away our exit is
+        self.turn_track -= deg
+        print("the exit is " + str(self.turn_track) + "degrees away.")
+        # slow down for more exact turning
+        self.setSpeed(self.LEFT_SPEED * self.TURN_MODIFIER,
+                      self.RIGHT_SPEED * self.TURN_MODIFIER)
+        # Do turn stuff
         right_rot()
-        time.sleep(deg*self.TIME_PER_DEGREE)
-        self.stop()
-
-    def leftTurn(self, deg):
-        print("let's turn" + str(deg) + " degrees right")
-        print("that means I turn for " + str(deg * self.TIME_PER_DEGREE) + "seconds")
-
-        print("lets change motor speeds!")
-        set_left_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
-        set_right_speed(self.LEFT_SPEED * self.TURN_MODIFIER)
-
-        left_rot()
+        # use our experiments to calculate the time needed to turn
         time.sleep(deg * self.TIME_PER_DEGREE)
         self.stop()
+        # return speed to normal cruise speeds
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
+
+    #Timed Degree Left Turn
+    def leftTurn(self, deg):
+        #adjust the tracker se we know how many degrees away our exit is
+        self.turn_track -= deg
+        print("the exit is " + str(self.turn_track) + "degrees away.")
+        #slow down for more exact turning
+        self.setSpeed(self.LEFT_SPEED * self.TURN_MODIFIER,
+                      self.RIGHT_SPEED * self.TURN_MODIFIER)
+        #Do turn stuff
+        left_rot()
+        #use our experiments to calculate the time needed to turn
+        time.sleep(deg * self.TIME_PER_DEGREE)
+        self.stop()
+        #return speed to normal cruise speeds
+        self.setSpeed(self.LEFT_SPEED, self.RIGHT_SPEED)
+
+
+    def setSpeed(self, left, right):
+        print("left speed: " + str(left))
+        print("right speed: " + str(right))
+        set_left_speed(int(left))
+        set_right_speed(int(right))
+        time.sleep(.05)
 
 
     # AUTONOMOUS DRIVING
