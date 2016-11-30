@@ -21,7 +21,7 @@ class GoPiggy(pigo.Pigo):
     LEFT_SPEED = 195
     servo = 100
     #0.0 IS THE HEADING OF THE EXIT, EVERY TURN CHANGES THIS NUMBER
-    Turn_track = 0.0
+    turn_track = 0.0
 
 
     def setSpeed(self, l, r):
@@ -167,7 +167,7 @@ class GoPiggy(pigo.Pigo):
             time.sleep(.01)
 
             # DECIDE WHICH WAY TO TURN
-    #Choose path
+    #Choose path2 changed wide scan to wider scan from choose path
     def choosePath2(self) -> str:
         print('Considering options...')
         if self.isClear():
