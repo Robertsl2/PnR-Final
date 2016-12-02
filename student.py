@@ -196,12 +196,12 @@ class GoPiggy(pigo.Pigo):
     #Timed Degree Right Turn
     def rightTurn(self, deg):
         # adjust the tracker se we know how many degrees away our exit is
-        self.turn_track -= deg
+        self.turn_track += deg
         print("the exit is " + str(self.turn_track) + "degrees away.")
         # slow down for more exact turning
         self.setSpeed(self.LEFT_SPEED * self.TURN_MODIFIER,
                       self.RIGHT_SPEED * self.TURN_MODIFIER)
-        # Do turn stuff
+        #Do turn stuff
         right_rot()
         # use our experiments to calculate the time needed to turn
         time.sleep(deg * self.TIME_PER_DEGREE)
@@ -239,16 +239,80 @@ class GoPiggy(pigo.Pigo):
         print("Piggy nav")
         ##### WRITE YOUR FINAL PROJECT HERE
         while True:
+            #todo
             # loop: check that its clear
             #isClear MVP
-            while self.moreClear():
+            #turn_target = self.kenny()
+            if self.moreClear():
                 # lets go forward a little
-                self.testDrive()
+                self.cruise()
+            #if i had to stop, pick a path
+            turn_target = self.kenny()
+
+            if turn_target < 0:
+                self.rightTurn(abs(turn_target))
+            else:
+                self.leftTurn(abs(turn_target))
+
+        '''
             answer = self.choosePath2()
             if answer == "left":
                 self.leftTurn(90)
+                # self.leftTurn(turn_target)
             elif answer == "right":
                 self.rightTurn(90)
+                # self.rightTurn(turn_target)
+            else:
+                Print("cant find path")
+                break
+        '''
+
+     # replacement turn method. find the best option to turn
+    def kenny(self):
+        # use the built in scan wideScan
+        self.wideScan()
+        # count will keep track of contigeous positive readings
+        count = 0
+        #list of all open paths we detect
+        option = [0]
+        SAFETY_BUFFER = 30
+        #what increment do you have your widescan set to
+        INC = 2
+
+        #######################################################
+        ################ BUILD THE OPTIONS
+        #######################################################
+
+        for x in range(self.MIDPOINT - 60, self.MIDPOINT + 60):
+            if self.scan[x]:
+                #add 30 if you want, this is an extra safety buffer
+                if self.scan[x] > (self.STOP_DIST + SAFETY_BUFFER):
+                    count += 1
+                #if this reading isn't safe
+                else:
+                    #aww nuts, i have to reset the count, this path wont work
+                    count = 0
+                if count > (20/INC):
+                    #success! i have found enough positive readings in a row to count
+                    print("found an option from " + str(x - 20) + " to " + str(x))
+                    count = 0
+                    option.append(x - 10)
+
+        #######################################################
+        ################ PICK FROM THE OPTIONS
+        #######################################################
+        bestoption = 90
+        winner = 0
+        for x in option:
+            #skip the filler option
+            if not x.__index__() == 0:
+                print("Choice # " + str(x.__index__()) + " is @ " + str(x) + " degrees")
+                ideal = self.turn_track + self.MIDPOINT
+                print("my ideal choice would be " + str(ideal))
+                if bestoption > abs(ideal - x):
+                    bestoption = abs(ideal - x)
+                    winner = x - self.MIDPOINT
+        return winner
 
     ###Test Drive Method
     def testDrive(self):
@@ -262,6 +326,23 @@ class GoPiggy(pigo.Pigo):
                 break
             time.sleep(.05)
             print("Seems clear, keep rolling")
+        self.stop()
+
+    #cruise method (replacement test drive method
+    def cruise(self):
+        # aim forward
+        servo(self.MIDPOINT)
+        time.sleep(.05)
+        # start moving forward
+        fwd()
+        # start an infinite loop
+        while True:
+            # break the loop if the sensor reading is closer than our stop dist
+            if us_dist(15) < self.STOP_DIST:
+                break
+            # break every now and then
+            time.sleep(.05)
+        # stop if the sensor loop broke
         self.stop()
 
         ####################################################
