@@ -14,8 +14,8 @@ class GoPiggy(pigo.Pigo):
     # You may want to add a variable to store your default speed
     MIDPOINT = 100
     STOP_DIST = 20
-    TIME_PER_DEGREE = .0035
-    TURN_MODIFIER = 1
+    TIME_PER_DEGREE = .007
+    TURN_MODIFIER = .5
     TURNSPEED = 195
     RIGHT_SPEED = 185
     LEFT_SPEED = 195
@@ -255,6 +255,7 @@ class GoPiggy(pigo.Pigo):
             # a positive turn is right
             if turn_target > 0:
                 self.rightTurn(abs(turn_target))
+
             # negative degrees mean left
             else:
                 # let's remove the negative with abs()
