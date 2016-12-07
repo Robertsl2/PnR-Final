@@ -268,6 +268,19 @@ class GoPiggy(pigo.Pigo):
             if self.isClear():
                 self.testDrive()
             self.backUp()
+            turn_target = self.choosePath2()
+            # a positive turn is right
+            if turn_target > 0:
+                self.rightTurn(abs(turn_target))
+
+            # negative degrees mean left
+            else:
+                # let's remove the negative with abs()
+                self.leftTurn(abs(turn_target))
+
+
+
+            '''
             answer = self.choosePath()
             if answer == "left":
                 self.leftTurn(90)
@@ -278,6 +291,7 @@ class GoPiggy(pigo.Pigo):
             else:
                 print("cant find path")
                 break
+            '''
 
 
     #back up when too close to the wall
