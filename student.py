@@ -268,7 +268,7 @@ class GoPiggy(pigo.Pigo):
             if self.isClear():
                 self.testDrive()
             self.backUp()
-            answer = self.choosePath()
+            answer = self.choosePath2()
             if answer == "left":
                 self.leftTurn(90)
                 #self.leftTurn(abs(turn_target))
