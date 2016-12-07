@@ -51,6 +51,7 @@ class GoPiggy(pigo.Pigo):
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
                 "5": ("test drive", self.testDrive),
+                "6": ("Second Navigate Method", self.nav2)
                 "s": ("check status", self.status),
                 "q": ("Quit", quit)
 
@@ -261,18 +262,20 @@ class GoPiggy(pigo.Pigo):
                 # let's remove the negative with abs()
                 self.leftTurn(abs(turn_target))
 
-        '''
+    #a different navigation method to try
+    def nav2(self):
+        while True:
             answer = self.choosePath2()
             if answer == "left":
-                self.leftTurn(90)
-                # self.leftTurn(turn_target)
+                #self.leftTurn(90)
+                self.leftTurn(turn_target)
             elif answer == "right":
-                self.rightTurn(90)
-                # self.rightTurn(turn_target)
+                #self.rightTurn(90)
+                self.rightTurn(turn_target)
             else:
                 Print("cant find path")
                 break
-        '''
+
 
     #back up when too close to the wall
     def backUp(self):
@@ -310,9 +313,9 @@ class GoPiggy(pigo.Pigo):
                     # aww nuts, I have to reset the count, this path won't work
                     count = 0
                 # YOU DECIDE: Is 16 degrees the right size to consider as a safe window?
-                if count > (10 / INC) - 1:
+                if count > (16 / INC) - 1:
                     # SUCCESS! I've found enough positive readings in a row
-                    print("---FOUND OPTION: from " + str(x - 10) + " to " + str(x))
+                    print("---FOUND OPTION: from " + str(x - 16) + " to " + str(x))
                     # set the counter up again for next time
                     count = 0
                     # add this option to the list
