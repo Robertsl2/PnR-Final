@@ -265,13 +265,15 @@ class GoPiggy(pigo.Pigo):
     #a different navigation method to try
     def nav2(self):
         while True:
-            answer = self.choosePath2()
+            if self.isClear():
+                self.choosePath2()
+            answer = self.choosePath()
             if answer == "left":
-                #self.leftTurn(90)
-                self.leftTurn(turn_target)
+                self.leftTurn(90)
+                #self.leftTurn(abs(turn_target))
             elif answer == "right":
-                #self.rightTurn(90)
-                self.rightTurn(turn_target)
+                self.rightTurn(90)
+                #self.rightTurn(abs(turn_target))
             else:
                 print("cant find path")
                 break
