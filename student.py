@@ -51,7 +51,7 @@ class GoPiggy(pigo.Pigo):
                 "3": ("Dance", self.dance),
                 "4": ("Calibrate servo", self.calibrate),
                 "5": ("test drive", self.testDrive),
-                "6": ("Second Navigate Method", self.nav2)
+                "6": ("Second Navigate Method", self.nav2),
                 "s": ("check status", self.status),
                 "q": ("Quit", quit)
 
