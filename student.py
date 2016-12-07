@@ -245,7 +245,7 @@ class GoPiggy(pigo.Pigo):
             # loop: check that its clear
             #isClear MVP
             #turn_target = self.kenny()
-            if self.moreClear():
+            if self.isClear():
                 # lets go forward a little
                 self.testDrive()
             #should I backup?
