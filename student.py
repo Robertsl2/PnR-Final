@@ -273,7 +273,7 @@ class GoPiggy(pigo.Pigo):
                 #self.rightTurn(90)
                 self.rightTurn(turn_target)
             else:
-                Print("cant find path")
+                print("cant find path")
                 break
 
 
