@@ -247,7 +247,7 @@ class GoPiggy(pigo.Pigo):
             #turn_target = self.kenny()
             if self.moreClear():
                 # lets go forward a little
-                self.cruise()
+                self.testDrive()
             #should I backup?
             self.backUp()
             #if i had to stop, pick a path
