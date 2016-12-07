@@ -266,7 +266,8 @@ class GoPiggy(pigo.Pigo):
     def nav2(self):
         while True:
             if self.isClear():
-                self.choosePath2()
+                self.testDrive()
+            self.backUp()
             answer = self.choosePath()
             if answer == "left":
                 self.leftTurn(90)
