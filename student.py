@@ -283,7 +283,7 @@ class GoPiggy(pigo.Pigo):
 
     #back up when too close to the wall
     def backUp(self):
-        if us_dist(15) < 10:
+        if us_dist(15) < 15:
             print("Too close. Backing up for half a second")
             bwd()
             time.sleep(.5)
