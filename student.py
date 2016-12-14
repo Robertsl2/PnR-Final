@@ -330,7 +330,7 @@ class GoPiggy(pigo.Pigo):
         ############## PICK FROM THE OPTIONS - experimental
 
                     # The biggest angle away from our midpoint we could possibly see is 90
-        bestoption = 90
+        bestoption = 100
         # the turn it would take to get us aimed back toward the exit - experimental
         ideal = -self.turn_track
         print("\nTHINKING. Ideal turn: " + str(ideal) + " degrees\n")
